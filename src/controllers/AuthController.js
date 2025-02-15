@@ -11,6 +11,10 @@ async function login(req, res, next) {
         if(user.senha == password){
             const token = await generateToken(user);
             if(token){
+                res.cookie('token', token, {
+                    maxAge: (1800 * 1000),
+                    httpOnly: true
+                });
                 return res.status(200).json({ token });
             }
         }

@@ -49,8 +49,7 @@ const UsuarioSchema = new mongoose.Schema({
       required: true 
     },
     compradoEm: {
-      type: Date,
-      default: Date.now
+      type: String
     }
   }]
 
@@ -59,21 +58,17 @@ const UsuarioSchema = new mongoose.Schema({
 const UsuarioModel = mongoose.model('usuarios', UsuarioSchema);
 
 async function getUsuarioByEmailModel(email) {
-  try {
-    const user = await UsuarioModel.findOne({ email: email });  
-    return user;  
-  } catch (err) {
-    return null; 
-  }
+  const user = await UsuarioModel.findOne({ email: email });  
+  return user;  
 }
 
 async function getUsuarioByCpfModel(cpf) {
-  try {
-    const user = await UsuarioModel.findOne({ cpf: cpf }); 
-    return user;  
-  } catch (err) {
-    return null; 
-  }
+  const user = await UsuarioModel.findOne({ cpf: cpf }); 
+  return user;  
+}
+async function getUsuarioByIdModel(id) {
+  const user = await UsuarioModel.findById(id); 
+  return user;    
 }
 
 async function createUsuarioModel(nome, permissao, cpf, email, senha, ingressos) {
@@ -89,10 +84,16 @@ async function createUsuarioModel(nome, permissao, cpf, email, senha, ingressos)
   return usuarioSalvo;
 }
 
+async function updateUsuarioModel(id,update) {
+  const usuario = await UsuarioModel.findByIdAndUpdate(id, update, { new: true });
+  return usuario;
+}
 
 
 export {
   getUsuarioByEmailModel,
   createUsuarioModel,
-  getUsuarioByCpfModel
+  getUsuarioByCpfModel,
+  updateUsuarioModel,
+  getUsuarioByIdModel
 };

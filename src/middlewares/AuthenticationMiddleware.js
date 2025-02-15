@@ -5,11 +5,13 @@ dotenv.config();
 
 
 const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
+    /*const authHeader = req.headers['authorization'];
     if(!authHeader){
         return next(new CustomError(401, 'Credenciais inválidas!'));
     }
-    const token = authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;
+    const token = authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;*/
+    
+    const token = req.cookies.token;
     if(!token){
         return next(new CustomError(401, 'Acesso negado!'));
     }
