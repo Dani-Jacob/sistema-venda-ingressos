@@ -6,6 +6,10 @@ const UsuarioSchema = new mongoose.Schema({
     required: true,  
     trim: true       
   },
+  permissao: {
+    type: String,
+    required: true,    
+  },
   cpf: {
     type: String,
     required: true,  
@@ -54,4 +58,41 @@ const UsuarioSchema = new mongoose.Schema({
 
 const UsuarioModel = mongoose.model('usuarios', UsuarioSchema);
 
-export default UsuarioModel;
+async function getUsuarioByEmailModel(email) {
+  try {
+    const user = await UsuarioModel.findOne({ email: email });  
+    return user;  
+  } catch (err) {
+    return null; 
+  }
+}
+
+async function getUsuarioByCpfModel(cpf) {
+  try {
+    const user = await UsuarioModel.findOne({ cpf: cpf }); 
+    return user;  
+  } catch (err) {
+    return null; 
+  }
+}
+
+async function createUsuarioModel(nome, permissao, cpf, email, senha, ingressos) {
+  const novoUsuario = new UsuarioModel({
+    nome: nome,
+    permissao: permissao,
+    cpf: cpf,
+    email: email,
+    senha: senha,
+    ingressos: ingressos
+  });
+  const usuarioSalvo = await novoUsuario.save();
+  return usuarioSalvo;
+}
+
+
+
+export {
+  getUsuarioByEmailModel,
+  createUsuarioModel,
+  getUsuarioByCpfModel
+};

@@ -1,34 +1,33 @@
-import userModel from '../models/usersModel.js';
+import {getUsuarioByEmailModel} from '../models/usuariosModels.js';
+import CustomError from '../customErros/CustomError.js';
+import jwt from 'jsonwebtoken';
+
 
 async function login(req, res, next) {
     const { email, password } = req.body;
 
-    const user = getUserByEmail(email);
-    
-    if(!user){
+    const user = await getUsuarioByEmailModel(email);
+    if(user){;
         if(user.senha == password){
-            const token = "" ;
-    
-            if(token == null){
-                
+            const token = await generateToken(user);
+            if(token){
+                return res.status(200).json({ token });
             }
-            res.status(200).json({ token });
         }
     }
     next(new CustomError(403, 'Permissão negada!'));
 }
 
-function getUserByEmail(email){
-    userModel.findOne({ email: email }).then(user => {
-        if (user) {
-        return user;
-        } else {
-        return null;
-        }
-  })
-  .catch(err => {
-    console.error('Erro ao buscar o usuário:', err);
-  });
-}
+
+async function generateToken(user){
+    const payload = {
+        id: user.id,
+        email: user.email,
+        permissao: user.permissao,
+    };
+    let secret = process.env.JWT_SECRET || 'PalavraSecretaShow';
+    let time = process.env.JWT_TIME || '1800s';
+    return jwt.sign(payload, secret, { expiresIn: time });
+};
 
 export default login;
