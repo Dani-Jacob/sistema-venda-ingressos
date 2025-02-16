@@ -12,7 +12,7 @@ import {
 const router = express.Router();
 
 //Create
-router.post('/',authenticateToken, createUsuarioController);
+router.post('/', createUsuarioController);
 
 
 export default router;

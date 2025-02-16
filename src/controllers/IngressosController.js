@@ -45,6 +45,7 @@ async function getIngressoByIdControler(req,res,next) {
     }
 }
 
+
 async function updateIngressoControler(req,res,next) {
     const {id} = req.params
     verificarIdMongoose(id,next);
@@ -93,7 +94,7 @@ async function comprarIngressoControler(req, res, next) {
             compradoEm: getFormattedDate()
         };
         const usuario = await updateUsuarioModel(id_usuario, { $push: { ingressos: novoIngresso } });
-        return res.status(201).json({usuario});
+        return res.status(201).redirect('/paginas/ingressoComprado');
     } catch (error) {
         return next(error);
     }

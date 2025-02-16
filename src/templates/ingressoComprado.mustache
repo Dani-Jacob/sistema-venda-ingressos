@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obrigado!</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.apresentacao {
+  color: white;
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.apresentacao h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color:black;
+}
+
+.apresentacao p {
+  font-size: 1.5rem;
+  color:black;
+}
+
+#botao-meus-ingressos{
+  background-color:rgb(81, 83, 236);
+  color: white;
+  border: none;
+  padding: 20px 30px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+#div-botao-ingressos{
+  display: flex;
+  justify-content: center;
+}
+
+</style>
+<body>
+  <header class="apresentacao">
+    <div class="texto-apresentacao">
+      <h1>Obrigado por comprar! s2</h1>
+    </div>
+  </header>
+
+
+<div id="div-botao-ingressos">
+  <form action="/paginas/home" method="GET">
+    <button id='botao-meus-ingressos' type="submit">Voltar</button>
+  </form>
+</div>
+
+</body>
+</html>

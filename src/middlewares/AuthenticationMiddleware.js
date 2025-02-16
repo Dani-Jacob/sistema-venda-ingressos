@@ -13,11 +13,13 @@ const authenticateToken = (req, res, next) => {
     
     const token = req.cookies.token;
     if(!token){
-        return next(new CustomError(401, 'Acesso negado!'));
+        return res.status(401).redirect('/paginas/login');
+        //return next(new CustomError(401, 'Acesso negado!'));
     }
     jwt.verify(token, process.env.JWT_SECRET || 'PalavraSecretaShow', (err, user) => {
         if(err){
-            return next(new CustomError(401, 'Credenciais inválidas!'));
+            return res.status(401).redirect('/paginas/login');
+            //return next(new CustomError(401, 'Credenciais inválidas!'));
         }
         req.user = user;
         next();

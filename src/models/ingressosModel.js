@@ -45,6 +45,11 @@ async function getAllIngressosModel() {
   return ingressos;
 }
 
+async function getAllIngressosDisponiveisModel() {
+  const ingressos = await IngressoModel.find({quantidade: {$gt: 0} });
+  return ingressos;
+}
+
 async function getIngressoByIdModel(id) {
   const ingresso = await IngressoModel.findById(id);
   return ingresso;
@@ -67,5 +72,6 @@ export {
   getAllIngressosModel,
   getIngressoByIdModel,
   updateIngressoModel,
-  deleteIngressoModel
+  deleteIngressoModel,
+  getAllIngressosDisponiveisModel
 };

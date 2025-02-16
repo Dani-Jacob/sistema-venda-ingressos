@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - Compra de Ingressos</title>
+  <title>Meus ingressos</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <style>
@@ -19,7 +19,7 @@ body {
 
 .apresentacao {
   color: white;
-  padding: 100px 20px;
+  padding: 70px 20px;
   text-align: center;
 }
 
@@ -35,7 +35,7 @@ body {
 }
 
 
-
+/* Seção de Eventos em Destaque */
 .informacoes {
   padding: 40px 20px;
     overflow-y:auto;
@@ -51,7 +51,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 20px;
-  overflow-x: auto; 
+  overflow-x: auto; /* Permitir rolagem horizontal */
 }
 
 .caixa-ingresso {
@@ -114,29 +114,23 @@ body {
 <body>
   <header class="apresentacao">
     <div class="texto-apresentacao">
-      <h1>Bem-vindo, {{nomeUsuario}}</h1>
-      <p>Compre os melhores ingressos aqui no Ingressos Show!</p>
+      <h1>Meus Ingressos</h1>
     </div>
   </header>
 
-<div id="div-botao-ingressos">
-  <form action="/paginas/meusIngressos" method="GET">
-    <button id='botao-meus-ingressos' type="submit">Meus Ingressos</button>
-  </form>
-</div>
-
-
   <section class="informacoes">
-    <h2>Todos os Ingressos</h2>
     <div class="ingressos-display">
 
     {{{todosOsIngressos}}}
     </div>
   </section>
 
-  <footer class="footer">
-    <p>&copy; 2025 Ingressos Show!. Todos os direitos reservados.</p>
-    <p>Contato: IngressosShow@ingressosShow.com.br</p>
-  </footer>
+<br><br><br>
+<div id="div-botao-ingressos">
+  <form action="/paginas/home" method="GET">
+    <button id='botao-meus-ingressos' type="submit">Voltar</button>
+  </form>
+</div>
+
 </body>
 </html>
